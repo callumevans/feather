@@ -1,0 +1,14 @@
+@import "media-utilities";
+
+#header {
+
+  @include respond-to(mobile) {
+    height: 100px;
+  }
+
+  @include respond-to(desktop) {
+    height: 300px;
+  }
+
+  background: red;
+}

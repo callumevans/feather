@@ -1,0 +1,32 @@
+$homepage-article-top-margin: 30px;
+$homepage-article-bottom-margin: 40px;
+$paragraph-spacing: 28px;
+
+.homepage-article {
+  margin: $homepage-article-top-margin 0 $homepage-article-bottom-margin 0;
+  font-family: 'Scope One', serif;
+
+  @include respond-to(mobile) {
+    font-size: 1.2em;
+  }
+
+  @include respond-to(desktop) {
+    font-size: 1.3em;
+  }
+
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  p {
+    margin: 0;
+    padding: 0 0 $paragraph-spacing 0;
+  }
+
+  .post-info {
+    padding: 8px 0 25px 0;
+    font-style: italic;
+    font-size: 0.9em;
+  }
+}

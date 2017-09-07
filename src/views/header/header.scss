@@ -1,0 +1,25 @@
+@import "../media-utilities";
+
+$desktop-header-top-margin: 50px;
+$mobile-header-top-margin: 25px;
+
+$headshot-width: 150px;
+$headshot-height: 150px;
+
+#header {
+  @include respond-to(mobile) {
+    margin-top: $mobile-header-top-margin;
+  }
+
+  @include respond-to(desktop) {
+    margin-top: $desktop-header-top-margin;
+  }
+}
+
+.head-shot {
+  width: $headshot-width;
+  height: $headshot-height;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: block;
+}

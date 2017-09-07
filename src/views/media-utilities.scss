@@ -1,0 +1,10 @@
+@import "variables";
+
+@mixin respond-to($media) {
+  @if $media == mobile {
+    @media only screen and (max-width: $mobile-width) { @content }
+  }
+  @else if $media == desktop {
+    @media only screen and (min-width: $mobile-width) { @content }
+  }
+}

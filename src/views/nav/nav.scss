@@ -1,0 +1,44 @@
+@import "../media-utilities";
+
+$mobile-base-height: 35px;
+$desktop-base-height: 40px;
+
+$nav-item-desktop-font-size: 1.4em;
+$nav-item-mobile-font-size: 1.2em;
+
+#nav {
+  width: 100%;
+  font-weight: bold;
+  font-family: 'Arvo', serif;
+
+  @include respond-to(mobile) {
+    min-height: $mobile-base-height;
+    line-height: $mobile-base-height;
+    font-size: $nav-item-mobile-font-size;
+  }
+
+  @include respond-to(desktop) {
+    min-height: $desktop-base-height;
+    line-height: $desktop-base-height;
+    font-size: $nav-item-desktop-font-size;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    li {
+      display: inline-block;
+
+      @include respond-to(mobile) {
+        padding: 0 10px;
+      }
+
+      @include respond-to(desktop) {
+        padding: 0 25px;
+      }
+    }
+  }
+}

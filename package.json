@@ -1,0 +1,26 @@
+{
+  "name": "feather",
+  "version": "0.1.0",
+  "devDependencies": {
+    "chai": "4.*",
+    "concurrently": "3.*",
+    "del": "3.*",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-concat": "2.*",
+    "gulp-rename": "1.*",
+    "gulp-sass": "3.*",
+    "gulp-uglify": "3.*",
+    "mocha": "3.*",
+    "sinon": "3.*"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "pug": "^2.0.0-rc.3"
+  },
+  "scripts": {
+    "start-dev": "gulp pack && concurrently \"gulp sass:watch\" \"node ./src/main.js\"",
+    "tests": "mocha tests --recursive",
+    "pack": "gulp pack",
+    "clean": "gulp clean"
+  }
+}

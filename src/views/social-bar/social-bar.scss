@@ -1,0 +1,61 @@
+$social-icon-size: 26px;
+
+$social-bar-top-spacing: 20px;
+$social-bar-bottom-spacing: 20px;
+$social-icon-base-colour: #4a4a4a;
+
+$facebook-colour: #3B5998;
+$twitter-colour: #00aced;
+$github-colour: #000000;
+$linkedin-colour: #007bb6;
+$stackoverflow-colour: #FF9900;
+
+@mixin social-icon-hover($colour) {
+  &:hover {
+    transition: color .2s ease;
+    color: $colour;
+  }
+}
+
+#social-media-links {
+  height: $social-icon-size;
+  font-size: $social-icon-size;
+  margin: $social-bar-top-spacing 0 $social-bar-bottom-spacing 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      padding: 0 13px;
+      color: $social-icon-base-colour;
+
+      a {
+        color: inherit;
+      }
+
+      .facebook-link {
+        @include social-icon-hover($facebook-colour);
+      }
+
+      .twitter-link {
+        @include social-icon-hover($twitter-colour);
+      }
+
+      .github-link {
+        @include social-icon-hover($github-colour);
+      }
+
+      .linkedin-link {
+        @include social-icon-hover($linkedin-colour);
+      }
+
+      .stackoverflow-link {
+        @include social-icon-hover($stackoverflow-colour);
+      }
+    }
+  }
+}

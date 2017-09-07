@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const renderer = require('../services/render-builder');
 
 router.get('/', (req, res) => {
-   res.render(
-       '../views/home/home.pug',
-       renderer.buildVariables({
-           title: 'Home',
-           message: 'Hello world!'
-       }));
+    res.buildRender('../views/home/home.pug', {
+            title: 'Home',
+            message: 'Hello world!'
+        });
 });
 
 module.exports = router;

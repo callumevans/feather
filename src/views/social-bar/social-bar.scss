@@ -11,8 +11,9 @@ $linkedin-colour: #007bb6;
 $stackoverflow-colour: #FF9900;
 
 @mixin social-icon-hover($colour) {
+  transition: color .2s ease;
+
   &:hover {
-    transition: color .2s ease;
     color: $colour;
   }
 }

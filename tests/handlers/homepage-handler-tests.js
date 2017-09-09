@@ -1,8 +1,7 @@
 const chai = require('chai');
 const sinon = require('sinon');
 const assert = chai.assert;
-
-const homepageHandler = require('../../src/handlers/homepage-handler');
+const proxyquire = require('proxyquire').noCallThru();
 
 describe('Handler', () =>{
     describe('handle()', () => {
@@ -12,15 +11,25 @@ describe('Handler', () =>{
         };
 
         let buildRenderFunction = sinon.spy(responseObject, 'buildRender');
-        let view = './views/test';
+        let allPosts = { obj: 'All Posts' };
+        let handler = proxyquire('../../src/handlers/homepage-handler', {
+            '../services/posts-service': {
+                getAllPosts: () => { return allPosts; }
+            }
+        });
 
         afterEach(() => {
             buildRenderFunction.reset();
         });
 
-        it('should call response object\'s buildRender() function', () => {
-            homepageHandler.handle(null, responseObject, null);
+        it('should call buildRender() on the response object', async () => {
+            await handler.handle(null, responseObject, null);
+
             assert(buildRenderFunction.calledOnce);
+            assert(buildRenderFunction.calledWithMatch(
+                '../views/home/home.pug', {
+                latestPosts: allPosts
+            }));
         });
     }) ;
 });

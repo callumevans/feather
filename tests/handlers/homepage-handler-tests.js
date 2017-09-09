@@ -14,7 +14,7 @@ describe('Handler', () =>{
         let allPosts = { obj: 'All Posts' };
         let handler = proxyquire('../../src/handlers/homepage-handler', {
             '../services/posts-service': {
-                getAllPosts: () => { return allPosts; }
+                getPosts: () => { return allPosts; }
             }
         });
 

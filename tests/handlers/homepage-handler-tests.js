@@ -10,8 +10,13 @@ describe('Handler', () =>{
             buildRender: () => { }
         };
 
-        let buildRenderFunction = sinon.spy(responseObject, 'buildRender');
-        let allPosts = { obj: 'All Posts' };
+        let buildRenderFunction = sinon.spy(
+            responseObject, 'buildRender');
+
+        let allPosts = {
+            obj: 'All Posts' 
+        };
+
         let handler = proxyquire('../../src/handlers/homepage-handler', {
             '../services/posts-service': {
                 getPosts: () => { return allPosts; }

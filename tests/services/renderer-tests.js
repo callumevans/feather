@@ -4,17 +4,15 @@ const assert = chai.assert;
 
 const renderer = require('../../src/services/renderer');
 
-// Setup data
-let response = {
-    render: () => { }
-};
-
-let renderFunction = sinon.spy(response, 'render');
-
-let view = './views/test';
-
 describe('Renderer', () =>{
    describe('build()', () => {
+
+       let response = {
+           render: () => { }
+       };
+
+       let renderFunction = sinon.spy(response, 'render');
+       let view = './views/test';
 
        afterEach(() => {
            renderFunction.reset();

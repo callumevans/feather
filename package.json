@@ -11,11 +11,16 @@
     "gulp-sass": "3.*",
     "gulp-uglify": "3.*",
     "mocha": "3.*",
+    "proxyquire": "1.*",
     "sinon": "3.*"
   },
   "dependencies": {
     "express": "^4.15.4",
-    "pug": "^2.0.0-rc.3"
+    "moment": "^2.18.1",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
+    "pug": "^2.0.0-rc.3",
+    "sequelize": "4.*"
   },
   "scripts": {
     "start-dev": "gulp pack && concurrently \"gulp sass:watch\" \"node ./src/main.js\"",

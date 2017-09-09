@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes
-app.use('/', async (req, res, next) => {
+app.get('/', async (req, res, next) => {
     await homeHandler.handle(req, res, next);
 });
 

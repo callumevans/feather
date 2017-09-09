@@ -14,7 +14,7 @@ describe('Handler', () =>{
             responseObject, 'buildRender');
 
         let allPosts = {
-            obj: 'All Posts' 
+            obj: 'All Posts'
         };
 
         let handler = proxyquire('../../src/handlers/homepage-handler', {

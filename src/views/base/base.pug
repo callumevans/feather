@@ -1,7 +1,10 @@
 html
     head
-        title #{SITE_TITLE}
-
+        if PAGE_TITLE
+            title #{SITE_TITLE} - #{PAGE_TITLE}
+        else
+            title #{SITE_TITLE}
+            
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css")
         link(rel="stylesheet" href="/site.css")
 

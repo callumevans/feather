@@ -8,7 +8,8 @@ async function handle(req, res, next) {
         res.send(`Post not found.`);
     } else {
         res.buildRender('../views/post/post.pug', {
-            post: post
+            post: post,
+            PAGE_TITLE: post.title
         });
     }
 

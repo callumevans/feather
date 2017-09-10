@@ -6,6 +6,8 @@ async function handle(req, res, next) {
     res.buildRender('../views/home/home.pug', {
         latestPosts: posts
     });
+
+    next();
 }
 
 module.exports = {

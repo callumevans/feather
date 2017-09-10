@@ -11,6 +11,8 @@ async function handle(req, res, next) {
             post: post
         });
     }
+
+    next();
 }
 
 module.exports = {

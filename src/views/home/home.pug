@@ -4,8 +4,8 @@ block content
 
     each val in latestPosts
         article
-            a(class="header-link" href="posts/" + val.seoTitle)
-                h1 #{val.title}
+            h1 
+                a(class="header-link" href="posts/" + val.seoTitle) #{val.title}
             p(class="post-info")= moment(val.publishedOn).format("MMMM D, YYYY")
             p #{val.summary}
             span

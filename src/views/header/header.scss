@@ -3,8 +3,8 @@
 $desktop-header-top-margin: 50px;
 $mobile-header-top-margin: 25px;
 
-$headshot-width: 150px;
-$headshot-height: 150px;
+$headshot-size-desktop: 150px;
+$headshot-size-mobile: 120px;
 
 #header {
   @include respond-to(mobile) {
@@ -17,8 +17,18 @@ $headshot-height: 150px;
 }
 
 .head-shot {
-  width: $headshot-width;
-  height: $headshot-height;
+  @include respond-to(mobile) {
+    width: $headshot-size-mobile;
+    height: $headshot-size-mobile;
+    margin-top: $mobile-header-top-margin;
+  }
+
+  @include respond-to(desktop) {
+    width: $headshot-size-desktop;
+    height: $headshot-size-desktop;
+    margin-top: $desktop-header-top-margin;
+  }
+
   border-radius: 50%;
   margin: 0 auto;
   display: block;

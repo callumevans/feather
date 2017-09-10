@@ -1,0 +1,8 @@
+extends ../base/base
+
+block content
+
+    article
+        h1 #{post.title}
+        p(class="post-info")= moment(post.publishedOn).format("MMMM D, YYYY")
+        div(class="post-content") !{post.content}

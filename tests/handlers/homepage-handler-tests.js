@@ -3,12 +3,14 @@ const sinon = require('sinon');
 const assert = chai.assert;
 const proxyquire = require('proxyquire').noCallThru();
 
-describe('Handler', () =>{
+describe('HomePage Handler', () =>{
     describe('handle()', () => {
 
         let responseObject = {
             buildRender: () => { }
         };
+
+        let nextFunction = () => {};
 
         let buildRenderFunction = sinon.spy(
             responseObject, 'buildRender');
@@ -19,7 +21,7 @@ describe('Handler', () =>{
 
         let handler = proxyquire('../../src/handlers/homepage-handler', {
             '../services/posts-service': {
-                getPosts: () => { return allPosts; }
+                getPosts: () => { return allPosts; },
             }
         });
 
@@ -28,7 +30,7 @@ describe('Handler', () =>{
         });
 
         it('should call buildRender() on the response object', async () => {
-            await handler.handle(null, responseObject, null);
+            await handler.handle(null, responseObject, nextFunction);
 
             assert(buildRenderFunction.calledOnce);
             assert(buildRenderFunction.calledWithMatch(

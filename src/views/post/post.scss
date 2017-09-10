@@ -1,0 +1,11 @@
+@import "../variables";
+
+.post-full-article {
+  @include respond-to(mobile) {
+    font-size: $mobile-paragraph-font-size;
+  }
+
+  @include respond-to(desktop) {
+    font-size: $desktop-paragraph-font-size;
+  }
+}

@@ -3,9 +3,10 @@ extends ../base/base
 block content
 
     each val in latestPosts
-        article(class="homepage-article")
-            h1 #{val.title}
-            p(class="post-info")= moment(moment.publishedOn).format("MMMM D, YYYY")
+        article
+            a(class="header-link" href="posts/" + val.seoTitle)
+                h1 #{val.title}
+            p(class="post-info")= moment(val.publishedOn).format("MMMM D, YYYY")
             p #{val.summary}
             span
-                a(href="#") Read more...
+                a(class="read-more" href="posts/" + val.seoTitle) Read more.

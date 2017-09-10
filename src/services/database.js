@@ -1,51 +1,27 @@
-const Sequelize = require('Sequelize');
+const MongoClient = require('mongodb').MongoClient;
 
-const sequelize = new Sequelize('postgres://postgres:root@localhost:5432/feather-blog');
+var databaseConnection;
 
-// Configure models
-const PostStatus = sequelize.define('post_status', {
-    description: {
-        type: Sequelize.STRING
-    }
-});
+function connect(callback) {
+    MongoClient.connect('mongodb://localhost:27017/test', (err, db) => {
 
-const Post = sequelize.define('posts', {
-    title: {
-        type: Sequelize.STRING
-    },
-    summary: {
-        type: Sequelize.TEXT
-    },
-    content: {
-        type: Sequelize.TEXT
-    },
-    publishedOn: {
-        type: Sequelize.DATE
-    }
-});
+        if (err) {
+            console.error('Could not connect to MongoDb...');
+            console.error(err);
+            return;
+        }
 
-PostStatus.hasOne(Post);
-
-PostStatus.sync().then(function () {
-    Post.sync().then(async function () {
-        await createState(1, 'Draft');
-        await createState(2, 'Published');
+        console.log('Successfully connected to MongoDb!');
+        databaseConnection = db;
+        return callback(err);
     });
-});
+}
 
-async function createState(id, description) {
-    let state = await PostStatus.find({where: { id: id }});
-
-    if (!state) {
-        PostStatus.create({
-            id: id,
-            description: description
-        });
-    }
+function connection() {
+    return databaseConnection;
 }
 
 module.exports = {
-    PostStatus: PostStatus,
-    Post: Post,
-    connection: sequelize
+    connect: connect,
+    connection: connection
 };

@@ -1,3 +1,57 @@
+@import "variables";
+@import "media-utilities";
+
 body {
   background: whitesmoke;
+
+  @include respond-to(tiny) {
+    font-size: 0.7em;
+  }
+}
+
+article {
+  font-family: 'Scope One', serif;
+
+  @include respond-to(mobile) {
+    margin: $homepage-article-margin-mobile 0;
+    font-size: $mobile-paragraph-font-size;
+  }
+
+  @include respond-to(desktop) {
+    margin: $homepage-article-margin-desktop 0;
+    font-size: $desktop-paragraph-font-size;
+  }
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+
+  @include respond-to(mobile) {
+    font-size: $mobile-header-1-font-size;
+  }
+
+  @include respond-to(desktop) {
+    font-size: $desktop-header-1-font-size;
+  }
+}
+
+p {
+  margin: 0;
+  padding: 0 0 $paragraph-spacing 0;
+  line-height: $paragraph-line-height;
+
+  @include respond-to(mobile) {
+    font-size: $mobile-paragraph-font-size;
+  }
+
+  @include respond-to(desktop) {
+    font-size: $mobile-paragraph-font-size;
+  }
+}
+
+.post-info {
+  padding: 8px 0 25px 0;
+  font-style: italic;
+  font-size: $post-info-font-size;
 }

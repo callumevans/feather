@@ -1,32 +1,20 @@
-$homepage-article-top-margin: 30px;
-$homepage-article-bottom-margin: 40px;
-$paragraph-spacing: 28px;
+@import "../variables";
 
-.homepage-article {
-  margin: $homepage-article-top-margin 0 $homepage-article-bottom-margin 0;
-  font-family: 'Scope One', serif;
+.read-more {
+  font-weight: bold;
+  font-size: $read-more-font-size;
+  color: $link-colour;
 
-  @include respond-to(mobile) {
-    font-size: 1.2em;
+  &:hover {
+    color: $link-hover-colour;
   }
+}
 
-  @include respond-to(desktop) {
-    font-size: 1.3em;
-  }
+a.header-link {
+  color: black;
+  text-decoration: none;
 
-  h1 {
-    margin: 0;
-    padding: 0;
-  }
-
-  p {
-    margin: 0;
-    padding: 0 0 $paragraph-spacing 0;
-  }
-
-  .post-info {
-    padding: 8px 0 25px 0;
-    font-style: italic;
-    font-size: 0.9em;
+  &:hover {
+    text-decoration: underline;
   }
 }

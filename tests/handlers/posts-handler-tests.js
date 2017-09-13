@@ -4,7 +4,7 @@ const assert = chai.assert;
 const proxyquire = require('proxyquire').noCallThru();
 
 describe('Posts Handler', () =>{
-    describe('handle()', () => {
+    describe('get()', () => {
 
         let responseObject = {
             status: () => {},
@@ -42,11 +42,11 @@ describe('Posts Handler', () =>{
             it('should call buildRender() on the response object', async () => {
                 post = { obj: 'A post' };
 
-                await handler.handle(requestObject, responseObject, nextFunction);
+                await handler.get(requestObject, responseObject, nextFunction);
 
                 assert(buildRenderFunction.calledOnce);
                 assert(buildRenderFunction.calledWithMatch(
-                    '../views/post/post.pug', {
+                    '../views/public/post/post.pug', {
                         post: post
                     }));
             });
@@ -55,13 +55,13 @@ describe('Posts Handler', () =>{
         describe('no post found', () => {
             it('should not call buildRender()', async () => {
                 post = null;
-                await handler.handle(requestObject, responseObject, nextFunction);
+                await handler.get(requestObject, responseObject, nextFunction);
                 assert(buildRenderFunction.notCalled);
             });
 
            it('should return a 404', async () => {
                post = null;
-               await handler.handle(requestObject, responseObject, nextFunction);
+               await handler.get(requestObject, responseObject, nextFunction);
                assert(setStatusFunction.calledWith(404));
            });
         });

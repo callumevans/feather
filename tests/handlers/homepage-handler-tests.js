@@ -4,7 +4,7 @@ const assert = chai.assert;
 const proxyquire = require('proxyquire').noCallThru();
 
 describe('HomePage Handler', () =>{
-    describe('handle()', () => {
+    describe('get()', () => {
 
         let responseObject = {
             buildRender: () => { }
@@ -30,11 +30,11 @@ describe('HomePage Handler', () =>{
         });
 
         it('should call buildRender() on the response object', async () => {
-            await handler.handle(null, responseObject, nextFunction);
+            await handler.get(null, responseObject, nextFunction);
 
             assert(buildRenderFunction.calledOnce);
             assert(buildRenderFunction.calledWithMatch(
-                '../views/home/home.pug', {
+                '../views/public/home/home.pug', {
                 latestPosts: allPosts
             }));
         });

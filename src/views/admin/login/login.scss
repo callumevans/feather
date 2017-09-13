@@ -1,0 +1,33 @@
+@import "../variables";
+
+#login-form {
+  max-width: $login-form-max-width;
+  margin: $login-form-top-margin auto;
+  padding: $login-form-padding;
+
+  input {
+    margin: 8px 0;
+    padding: 12px 20px;
+  }
+
+  input[type=text], input[type=password] {
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #a1a1a1;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+    width: 100%;
+    background: $login-form-submit-button-colour;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border-style: none;
+
+    &:hover {
+      background: $login-form-submit-button-hover-colour;
+    }
+  }
+}

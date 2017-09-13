@@ -25,7 +25,6 @@ async function post(req, res, next) {
         "email": req.body.email
     });
 
-    console.log(token);
     res.json(token);
 }
 

@@ -1,35 +1,51 @@
-extends ../base/base
+html
+    head
+        title #{SITE_TITLE} - Admin
 
-block content
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css")
+        link(rel="stylesheet" href="/admin.css")
 
-    form(id="login-form")
-        input(id="email" placeholder="email address" type="text")
-        input(id="password" placeholder="password" type="password")
-        input(type="submit" value="Login")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
 
-    script.
-        var form = document.getElementById('login-form');
+        body
+            form(id="login-form")
+                    input(id="email" placeholder="email address" type="text")
+                    input(id="password" placeholder="password" type="password")
+                    input(type="submit" value="Login")
 
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
+            script.
+                var form = document.getElementById('login-form');
 
-            var email = form.elements["email"].value;
-            var password = form.elements["password"].value;
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
 
-            tryLogin(email, password, function (response) {
-                console.log(response);
-            });
-        });
+                    var email = form.elements["email"].value;
+                    var password = form.elements["password"].value;
 
-        function tryLogin(email, password, callback) {
-            var request = new XMLHttpRequest();
+                    getToken(email, password).then(function (response) {
+                        if (response.status === 200) {
+                            response.text().then(function (token) {
+                                document.cookie = 'token=' + token;
+                                window.location.href = '../admin';
+                            });
+                        } else {
+                            console.error('Error logging in.');
+                        }
+                    });
+                });
 
-            request.onload = callback(request);
-            request.open('POST', './login', true);
-            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                function getToken(email, password) {
+                    var body = JSON.stringify({
+                        email: email,
+                        password: password
+                    });
 
-            request.send(JSON.stringify({
-                email: email,
-                password: password
-            }));
-        }
+                    return fetch('/login', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/text',
+                            'Content-Type': 'application/json'
+                        },
+                        body: body
+                    });
+                }

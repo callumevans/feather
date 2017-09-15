@@ -28,8 +28,13 @@ function generateToken(claims) {
     return jwt.encode(claims, jwtSecret);
 }
 
+function decodeToken(token) {
+    return jwt.decode(token, jwtSecret);
+}
+
 module.exports = {
     verifyPassword: verifyPassword,
     createHash: createHash,
-    generateToken: generateToken
+    generateToken: generateToken,
+    decodeToken: decodeToken
 };

@@ -10,8 +10,6 @@ describe('HomePage Handler', () =>{
             buildRender: () => { }
         };
 
-        let nextFunction = () => {};
-
         let buildRenderFunction = sinon.spy(
             responseObject, 'buildRender');
 
@@ -30,7 +28,7 @@ describe('HomePage Handler', () =>{
         });
 
         it('should call buildRender() on the response object', async () => {
-            await handler.get(null, responseObject, nextFunction);
+            await handler.get(null, responseObject);
 
             assert(buildRenderFunction.calledOnce);
             assert(buildRenderFunction.calledWithMatch(

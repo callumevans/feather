@@ -1,6 +1,6 @@
 const postsService = require('../services/posts-service');
 
-async function get(req, res, next) {
+async function get(req, res) {
     let post = await postsService.getPost(req.params.seoTitle);
 
     if (!post) {
@@ -12,8 +12,6 @@ async function get(req, res, next) {
             PAGE_TITLE: post.title
         });
     }
-
-    return next();
 }
 
 module.exports = {

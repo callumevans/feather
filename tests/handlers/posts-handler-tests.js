@@ -18,8 +18,6 @@ describe('Posts Handler', () =>{
             }
         };
 
-        let nextFunction = () => {};
-
         let buildRenderFunction = sinon.spy(
             responseObject, 'buildRender');
 
@@ -42,7 +40,7 @@ describe('Posts Handler', () =>{
             it('should call buildRender() on the response object', async () => {
                 post = { obj: 'A post' };
 
-                await handler.get(requestObject, responseObject, nextFunction);
+                await handler.get(requestObject, responseObject);
 
                 assert(buildRenderFunction.calledOnce);
                 assert(buildRenderFunction.calledWithMatch(
@@ -55,13 +53,13 @@ describe('Posts Handler', () =>{
         describe('no post found', () => {
             it('should not call buildRender()', async () => {
                 post = null;
-                await handler.get(requestObject, responseObject, nextFunction);
+                await handler.get(requestObject, responseObject);
                 assert(buildRenderFunction.notCalled);
             });
 
            it('should return a 404', async () => {
                post = null;
-               await handler.get(requestObject, responseObject, nextFunction);
+               await handler.get(requestObject, responseObject);
                assert(setStatusFunction.calledWith(404));
            });
         });

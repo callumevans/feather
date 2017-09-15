@@ -34,6 +34,15 @@ function packFontAwesome() {
         .pipe(gulp.dest(public));
 }
 
+
+function packAdminJs() {
+    return gulp.src('./src/assets/scripts/admin/**/*.js')
+        .pipe(concatr('admin.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(public));
+}
+
+
 function sassWatch() {
     return gulp.watch('./src/views/**/*.scss', gulp.parallel(packPublicSass, packAdminSass));
 }
@@ -44,7 +53,7 @@ function clean() {
 
 // Tasks
 gulp.task('pack', gulp.parallel(
-    packPublicSass, packAdminSass, packFontAwesome, packImages
+    packPublicSass, packAdminSass, packFontAwesome, packAdminJs, packImages
 ));
 
 gulp.task('sass:watch', gulp.series(sassWatch));

@@ -4,46 +4,56 @@ const assert = chai.assert;
 const proxyquire = require('proxyquire').noCallThru();
 
 describe('Posts Handler', () =>{
+    let responseObject;
+    let requestObject;
+    let handler;
+
+    let buildRender;
+    let setStatus;
+
+    let post;
+
     describe('get()', () => {
+        beforeEach(() => {
+            responseObject = {
+                status: () => {},
+                send: () => {},
+                buildRender: () => {}
+            };
 
-        let responseObject = {
-            status: () => {},
-            send: () => {},
-            buildRender: () => {}
-        };
+            requestObject = {
+                params: {
+                    seoTitle: 'seo title'
+                }
+            };
 
-        let requestObject = {
-            params: {
-                seoTitle: 'seo title'
-            }
-        };
+            buildRender = sinon.spy(
+                responseObject, 'buildRender');
 
-        let buildRenderFunction = sinon.spy(
-            responseObject, 'buildRender');
+            setStatus = sinon.spy(
+                responseObject, 'status');
 
-        let setStatusFunction = sinon.spy(
-            responseObject, 'status');
-
-        let post;
-
-        let handler = proxyquire('../../src/handlers/post-handler', {
-            '../services/posts-service': {
-                getPost: () => { return post; }
-            }
+            handler = proxyquire('../../src/handlers/post-handler', {
+                '../services/posts-service': {
+                    getPost: () => { return post; }
+                }
+            });
         });
 
         afterEach(() => {
-            buildRenderFunction.reset();
+            buildRender.reset();
         });
 
         describe('post found', () => {
-            it('should call buildRender() on the response object', async () => {
-                post = { obj: 'A post' };
+            beforeEach(() => {
+                post = { obj: 'Post!' }
+            });
 
+            it('should call buildRender() on the response object', async () => {
                 await handler.get(requestObject, responseObject);
 
-                assert(buildRenderFunction.calledOnce);
-                assert(buildRenderFunction.calledWithMatch(
+                assert(buildRender.calledOnce);
+                assert(buildRender.calledWithMatch(
                     '../views/public/post/post.pug', {
                         post: post
                     }));
@@ -51,16 +61,18 @@ describe('Posts Handler', () =>{
         });
 
         describe('no post found', () => {
+            beforeEach(() => {
+               post = null;
+            });
+
             it('should not call buildRender()', async () => {
-                post = null;
                 await handler.get(requestObject, responseObject);
-                assert(buildRenderFunction.notCalled);
+                assert(buildRender.notCalled);
             });
 
            it('should return a 404', async () => {
-               post = null;
                await handler.get(requestObject, responseObject);
-               assert(setStatusFunction.calledWith(404));
+               assert(setStatus.calledWith(404));
            });
         });
     });

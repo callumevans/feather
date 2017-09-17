@@ -4,34 +4,40 @@ const assert = chai.assert;
 const proxyquire = require('proxyquire').noCallThru();
 
 describe('HomePage Handler', () =>{
+    let responseObject;
+    let handler;
+    let buildRender;
+    let allPosts;
+
     describe('get()', () => {
+        beforeEach(() => {
+            responseObject = {
+                buildRender: () => { }
+            };
 
-        let responseObject = {
-            buildRender: () => { }
-        };
+            buildRender = sinon.spy(
+                responseObject, 'buildRender');
 
-        let buildRenderFunction = sinon.spy(
-            responseObject, 'buildRender');
+            allPosts = {
+                obj: 'All Posts'
+            };
 
-        let allPosts = {
-            obj: 'All Posts'
-        };
-
-        let handler = proxyquire('../../src/handlers/homepage-handler', {
-            '../services/posts-service': {
-                getPosts: () => { return allPosts; },
-            }
+            handler = proxyquire('../../src/handlers/homepage-handler', {
+                '../services/posts-service': {
+                    getPosts: () => { return allPosts; },
+                }
+            });
         });
 
         afterEach(() => {
-            buildRenderFunction.reset();
+            buildRender.reset();
         });
 
         it('should call buildRender() on the response object', async () => {
             await handler.get(null, responseObject);
 
-            assert(buildRenderFunction.calledOnce);
-            assert(buildRenderFunction.calledWithMatch(
+            assert(buildRender.calledOnce);
+            assert(buildRender.calledWithMatch(
                 '../views/public/home/home.pug', {
                 latestPosts: allPosts
             }));

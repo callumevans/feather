@@ -1,15 +1,13 @@
 const postsService = require('../services/posts-service');
 
-async function handle(req, res, next) {
+async function get(req, res) {
     let posts = await postsService.getPosts();
 
-    res.buildRender('../views/home/home.pug', {
+    res.buildRender('../views/public/home/home.pug', {
         latestPosts: posts
     });
-
-    next();
 }
 
 module.exports = {
-    handle: handle
+    get: get
 };

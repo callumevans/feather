@@ -1,0 +1,51 @@
+html
+    head
+        title #{SITE_TITLE} - Admin
+
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css")
+        link(rel="stylesheet" href="/admin.css")
+
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+
+        body
+            form(id="login-form")
+                    input(id="email" placeholder="email address" type="text")
+                    input(id="password" placeholder="password" type="password")
+                    input(type="submit" value="Login")
+
+            script.
+                var form = document.getElementById('login-form');
+
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    var email = form.elements["email"].value;
+                    var password = form.elements["password"].value;
+
+                    getToken(email, password).then(function (response) {
+                        if (response.status === 200) {
+                            response.text().then(function (token) {
+                                document.cookie = 'token=' + token;
+                                window.location.href = '../admin';
+                            });
+                        } else {
+                            console.error('Error logging in.');
+                        }
+                    });
+                });
+
+                function getToken(email, password) {
+                    var body = JSON.stringify({
+                        email: email,
+                        password: password
+                    });
+
+                    return fetch('/login', {
+                        method: 'post',
+                        headers: {
+                            'Accept': 'application/text',
+                            'Content-Type': 'application/json'
+                        },
+                        body: body
+                    });
+                }

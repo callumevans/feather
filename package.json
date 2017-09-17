@@ -11,18 +11,23 @@
     "gulp-sass": "3.*",
     "gulp-uglify": "3.*",
     "mocha": "3.*",
+    "normalize.css": "7.*",
     "proxyquire": "1.*",
     "sinon": "3.*"
   },
   "dependencies": {
-    "express": "^4.15.4",
+    "bcrypt": "1.*",
+    "body-parser": "^1.18.1",
+    "cookie-parser": "^1.4.3",
+    "express": "4.*",
+    "jwt-simple": "^0.5.1",
     "moment": "2.*",
     "mongodb": "2.2.*",
     "pug": "^2.0.0-rc.3"
   },
   "scripts": {
-    "start-dev": "gulp pack && concurrently \"gulp sass:watch\" \"node ./src/main.js\"",
-    "tests": "mocha tests --recursive",
+    "start-dev": "gulp pack && concurrently \"gulp sass:watch\" \"node %NODE_DEBUG_OPTION% ./src/main.js\"",
+    "test": "mocha tests --recursive",
     "pack": "gulp pack",
     "clean": "gulp clean"
   }

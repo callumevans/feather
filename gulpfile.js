@@ -8,10 +8,22 @@ const uglify = require('gulp-uglify');
 // Public
 const public = './src/public';
 
-function packSass() {
-    return gulp.src('./src/views/main.scss')
+function packPublicSass() {
+    return gulp.src('./src/views/public/site.scss')
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(rename('site.css'))
+        .pipe(gulp.dest(public));
+}
+
+function packAdminSass() {
+    return gulp.src('./src/views/admin/admin.scss')
+        .pipe(sass({outputStyle: 'compressed'}))
+        .pipe(rename('admin.css'))
+        .pipe(gulp.dest(public));
+}
+
+function packImages() {
+    return gulp.src(['./src/assets/images/**/*.*'])
         .pipe(gulp.dest(public));
 }
 
@@ -22,8 +34,17 @@ function packFontAwesome() {
         .pipe(gulp.dest(public));
 }
 
+
+function packAdminJs() {
+    return gulp.src('./src/assets/scripts/admin/**/*.js')
+        .pipe(concatr('admin.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(public));
+}
+
+
 function sassWatch() {
-    return gulp.watch('./src/views/**/*.scss', packSass);
+    return gulp.watch('./src/views/**/*.scss', gulp.parallel(packPublicSass, packAdminSass));
 }
 
 function clean() {
@@ -32,12 +53,12 @@ function clean() {
 
 // Tasks
 gulp.task('pack', gulp.parallel(
-    packSass, packFontAwesome
+    packPublicSass, packAdminSass, packFontAwesome, packAdminJs, packImages
 ));
 
 gulp.task('sass:watch', gulp.series(sassWatch));
 
-gulp.task('pack:sass', gulp.series(packSass));
+gulp.task('pack:sass', gulp.series(packPublicSass));
 
 gulp.task('pack:font-awesome', gulp.series(packFontAwesome));
 

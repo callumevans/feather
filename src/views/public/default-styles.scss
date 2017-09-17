@@ -46,7 +46,7 @@ p {
   }
 
   @include respond-to(desktop) {
-    font-size: $mobile-paragraph-font-size;
+    font-size: $desktop-paragraph-font-size;
   }
 }
 

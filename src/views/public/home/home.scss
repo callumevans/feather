@@ -2,15 +2,15 @@
 
 .read-more {
   font-size: $read-more-font-size;
-  color: $link-colour;
+  color: $standard-font-colour;
 
   &:hover {
-    color: $link-hover-colour;
+    color: $standard-font-colour;
   }
 }
 
 a.header-link {
-  color: black;
+  color: $standard-font-colour;
   text-decoration: none;
 
   &:hover {

@@ -9,11 +9,9 @@ const authService = require('./services/auth-service');
 // Renderer
 const renderer = require('./services/renderer');
 
-// Handlers
-const homeHandler = require('./handlers/homepage-handler');
-const postHandler = require('./handlers/post-handler');
-const loginHandler = require('./handlers/login-handler');
-const adminHandler = require('./handlers/admin-handler');
+// Routers
+const publicRouter = require('./routers/public');
+const adminRouter = require('./routers/admin');
 
 // Moment JS in app locals
 app.locals.moment = require('moment');
@@ -55,25 +53,8 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes
-app.get('/', async (req, res) => {
-    await homeHandler.get(req, res);
-});
-
-app.get('/posts/:seoTitle', async (req, res) => {
-    await postHandler.get(req, res);
-});
-
-app.get('/login', async (req, res) => {
-    await loginHandler.get(req, res);
-});
-
-app.post('/login', async (req, res) => {
-    await loginHandler.post(req, res);
-});
-
-app.get('/admin', async (req, res) => {
-   await adminHandler.get(req, res);
-});
+app.use('/', publicRouter);
+app.use('/admin', adminRouter);
 
 // Start server
 db.connect(() => {

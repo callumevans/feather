@@ -2,4 +2,19 @@ extends ../base/base
 
 block content
 
-    p 'Hello world!'
+    span(id="create-post") Create Post
+
+    table(id="posts-table")
+        tr(class="header-row")
+            th(width="15%") Title
+            th(width="60%") Summary
+            th(width="10%") Published
+            th(width="5%")
+
+        each post in posts
+            tr(class="post-row")
+                td #{post.seoTitle}
+                td(class="summary") #{post.summary}
+                td #{post.publishedOn}
+                td
+                    a(href="posts/" + post.seoTitle class="edit-button") Edit

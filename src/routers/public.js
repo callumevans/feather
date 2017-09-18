@@ -1,11 +1,23 @@
+const express = require('express');
+const router = express.Router();
+
+const postsService = require('../services/posts-service');
 const authService = require('../services/auth-service');
 const userService = require('../services/user-service');
 
-function get(req, res) {
-    res.buildRender('../views/admin/login/login.pug');
-}
+router.get('/', async (req, res) => {
+    let posts = await postsService.getPosts();
 
-async function post(req, res) {
+    res.buildRender('../views/public/home/home.pug', {
+        latestPosts: posts
+    });
+});
+
+router.get('/login', (req, res) => {
+    res.buildRender('../views/admin/login/login.pug');
+});
+
+router.post('/login', async (req, res) => {
     if (!req.body.email || !req.body.password)
         return badLogin(res);
 
@@ -28,14 +40,25 @@ async function post(req, res) {
     });
 
     res.send(token);
-}
+});
+
+router.get('/posts/:seoTitle', async (req, res) => {
+    let post = await postsService.getPost(req.params.seoTitle);
+
+    if (!post) {
+        res.status(404);
+        res.send(`Post not found.`);
+    } else {
+        res.buildRender('../views/public/post/post.pug', {
+            post: post,
+            PAGE_TITLE: post.title
+        });
+    }
+});
 
 function badLogin(res) {
     res.status(400);
     res.send('Error logging in with provided credentials.');
 }
 
-module.exports = {
-    get: get,
-    post: post
-};
+module.exports = router;

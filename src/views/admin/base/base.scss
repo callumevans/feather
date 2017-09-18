@@ -5,7 +5,19 @@ body {
 }
 
 #admin-container {
-  position: fixed;
   width: 100%;
   height: 100%;
+}
+
+#admin-nav {
+  background: #222627;
+  height: 60px;
+  width: 100%;
+}
+
+#admin-content {
+  width: 85%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 50px;
 }

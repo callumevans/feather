@@ -6,9 +6,11 @@
   font-family: Arial, sans-serif;
   text-align: left;
   border-collapse: collapse;
+  margin-top: 20px;
 
   .header-row {
     border-bottom: 1px solid #323232;
+
     th {
       height: 50px;
       padding: 5px;
@@ -42,24 +44,60 @@
   display: block;
   width: 60px;
   height: 25px;
-  background: #8aa7ff;
+  background: #82a3ce;
   text-align: center;
   line-height: 25px;
   border-radius: 15px;
   color: white;
   text-decoration: none;
   text-transform: lowercase;
+
+  &:hover {
+    background: #93b7e5;
+    cursor: pointer;
+  }
 }
 
-#create-post {
-  display: block;
-  width: 120px;
-  height: 35px;
-  line-height: 35px;
-  background: #5875c0;
-  text-align: center;
-  color: white;
-  border-radius: 15px;
-  font-family: Arial, sans-serif;
+#create-post-form {
+  width: 310px;
   float: right;
+  margin: 0 75px 0 0;
+
+  input[type=text] {
+    float: left;
+    width: 200px;
+    height: 35px;
+    padding: 0 10px;
+    border-radius: 15px 0 0 15px;
+    border: 1px solid #c6c6c6;
+    border-right: none;
+
+    &:focus {
+      outline: none;
+      border-color: #989898;
+    }
+  }
+
+  #create-post-button {
+    display: block;
+    width: 110px;
+    height: 35px;
+    line-height: 35px;
+    background: #82a3ce;
+    text-align: center;
+    color: white;
+    border-radius: 0 15px 15px 0;
+    font-family: Arial, sans-serif;
+    float: right;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background: #93b7e5;
+      cursor: pointer;
+    }
+  }
 }

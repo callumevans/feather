@@ -3,15 +3,6 @@ const router = express.Router();
 
 const postsService = require('../services/posts-service');
 
-router.use((req, res, next) => {
-    if (!req.userIdentity) {
-        res.status(401);
-        res.send('No authorisation set.')
-    } else {
-        next();
-    }
-});
-
 router.get('/', async (req, res) => {
     res.redirect(req.baseUrl + '/posts');
 });
@@ -24,8 +15,22 @@ router.get('/posts', async (req, res) => {
     });
 });
 
+router.post('/posts', async (req, res) => {
+    if (!req.body.postTitle) {
+        res.status(400);
+        res.send('No post title provided');
+        return;
+    }
+
+    await postsService.createPost(
+        req.body.postTitle, 'Draft');
+
+    res.status(201);
+    res.send('Post created');
+});
+
 router.get('/posts/:seoTitle', (req, res) => {
-    res.send('Editing ');
+    res.send('Editing...');
 });
 
 module.exports = router;

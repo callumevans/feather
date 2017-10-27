@@ -19,8 +19,8 @@ html
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
 
-                    var email = form.elements["email"].value;
-                    var password = form.elements["password"].value;
+                    var email = form.elements['email'].value;
+                    var password = form.elements['password'].value;
 
                     getToken(email, password).then(function (response) {
                         if (response.status === 200) {

@@ -2,4 +2,50 @@ extends ../base/base
 
 block content
 
-    p 'Hello world!'
+    form(id="create-post-form")
+        input(id="post-title" type="text" placeholder="Title")
+        input(type="submit" value="Create Post" id="create-post-button")
+
+    table(id="posts-table")
+        tr(class="header-row")
+            th(width="15%") Title
+            th(width="60%") Summary
+            th(width="10%") Published
+            th(width="5%")
+
+        each post in posts
+            tr(class="post-row")
+                td #{post.seoTitle}
+                td(class="summary") #{post.summary}
+                td #{post.publishedOn}
+                td
+                    a(href="posts/" + post.seoTitle class="edit-button") Edit
+
+        script.
+            var form = document.getElementById('create-post-form');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                var postTitle = form.elements['post-title'].value;
+
+                submitPost(postTitle).then(function (response) {
+                    console.log(response.status);
+                });
+            });
+
+            function submitPost(title) {
+                var body = JSON.stringify({
+                    postTitle: title,
+                    status: 'Draft'
+                });
+
+                return fetch('/admin/posts', {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/text',
+                        'Content-Type': 'application/json'
+                    },
+                    body: body
+                });
+            }

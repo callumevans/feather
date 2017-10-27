@@ -1,33 +1,103 @@
 @import "../variables";
 
-#login-form {
-  max-width: $login-form-max-width;
-  margin: $login-form-top-margin auto;
-  padding: $login-form-padding;
+#posts-table {
+  width: 100%;
+  float: left;
+  font-family: Arial, sans-serif;
+  text-align: left;
+  border-collapse: collapse;
+  margin-top: 20px;
 
-  input {
-    margin: 8px 0;
-    padding: 12px 20px;
+  .header-row {
+    border-bottom: 1px solid #323232;
+
+    th {
+      height: 50px;
+      padding: 5px;
+    }
   }
 
-  input[type=text], input[type=password] {
-    width: 100%;
-    display: inline-block;
-    border: 1px solid #a1a1a1;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-
-  input[type=submit] {
-    width: 100%;
-    background: $login-form-submit-button-colour;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    border-style: none;
+  .post-row {
+    td {
+      height: 50px;
+      padding: 0 10px;
+    }
 
     &:hover {
-      background: $login-form-submit-button-hover-colour;
+      background: #e9f2f5 !important;
+    }
+
+    &:nth-child(even) {
+      background: #efefef;
+    }
+
+    .summary {
+      max-width: 100px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+
+.edit-button {
+  display: block;
+  width: 60px;
+  height: 25px;
+  background: #82a3ce;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 15px;
+  color: white;
+  text-decoration: none;
+  text-transform: lowercase;
+
+  &:hover {
+    background: #93b7e5;
+    cursor: pointer;
+  }
+}
+
+#create-post-form {
+  width: 310px;
+  float: right;
+  margin: 0 75px 0 0;
+
+  input[type=text] {
+    float: left;
+    width: 200px;
+    height: 35px;
+    padding: 0 10px;
+    border-radius: 15px 0 0 15px;
+    border: 1px solid #c6c6c6;
+    border-right: none;
+
+    &:focus {
+      outline: none;
+      border-color: #989898;
+    }
+  }
+
+  #create-post-button {
+    display: block;
+    width: 110px;
+    height: 35px;
+    line-height: 35px;
+    background: #82a3ce;
+    text-align: center;
+    color: white;
+    border-radius: 0 15px 15px 0;
+    font-family: Arial, sans-serif;
+    float: right;
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background: #93b7e5;
+      cursor: pointer;
     }
   }
 }

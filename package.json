@@ -26,7 +26,7 @@
     "pug": "^2.0.0-rc.3"
   },
   "scripts": {
-    "start-dev": "gulp pack && concurrently \"gulp sass:watch\" \"node %NODE_DEBUG_OPTION% ./src/main.js\"",
+    "start-dev": "gulp pack && concurrently \"gulp sass:watch\" \"node ./src/main.js\"",
     "test": "mocha tests --recursive",
     "pack": "gulp pack",
     "clean": "gulp clean"

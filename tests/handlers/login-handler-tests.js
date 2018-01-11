@@ -64,9 +64,9 @@ describe('Login Handler', () =>{
             obj: 'All Posts'
         };
 
-        handler = proxyquire('../../src/handlers/login-handler', {
-            '../services/auth-service': authService,
-            '../services/user-service': userService
+        handler = proxyquire('../../src/handlers/public/login-handler', {
+            '../../services/auth-service': authService,
+            '../../services/user-service': userService
         });
     });
 
@@ -80,7 +80,7 @@ describe('Login Handler', () =>{
 
             assert(buildRender.calledOnce);
             assert(buildRender.calledWithMatch(
-                '../views/admin/login/login.pug'));
+                '../../views/admin/login/login.pug'));
         });
     }) ;
 

@@ -33,8 +33,8 @@ describe('Posts Handler', () =>{
             setStatus = sinon.spy(
                 responseObject, 'status');
 
-            handler = proxyquire('../../src/handlers/posts-handler', {
-                '../services/posts-service': {
+            handler = proxyquire('../../src/handlers/public/posts-handler', {
+                '../../services/posts-service': {
                     getPost: () => { return post; }
                 }
             });
@@ -54,7 +54,7 @@ describe('Posts Handler', () =>{
 
                 assert(buildRender.calledOnce);
                 assert(buildRender.calledWithMatch(
-                    '../views/public/post/post.pug', {
+                    '../../views/public/post/post.pug', {
                         post: post
                     }));
             });

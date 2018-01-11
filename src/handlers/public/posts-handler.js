@@ -1,4 +1,4 @@
-const postsService = require('../services/posts-service');
+const postsService = require('../../services/posts-service');
 
 async function get(req, res) {
     let post = await postsService.getPost(req.params.seoTitle);
@@ -7,7 +7,7 @@ async function get(req, res) {
         res.status(404);
         res.send(`Post not found.`);
     } else {
-        res.buildRender('../views/public/post/post.pug', {
+        res.buildRender('../../views/public/post/post.pug', {
             post: post,
             PAGE_TITLE: post.title
         });

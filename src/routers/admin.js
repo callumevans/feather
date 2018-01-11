@@ -1,46 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
-const postsService = require('../services/posts-service');
+const rootHandler = require('../handlers/admin/root-handler');
+const postsHandler = require('../handlers/admin/posts-handler');
 
 router.get('/', async (req, res) => {
-    res.redirect(req.baseUrl + '/posts');
+    return rootHandler.get(req, res);
 });
 
 router.get('/posts', async (req, res) => {
-    let posts = await postsService.getPosts();
-
-    res.buildRender('../views/admin/posts-list/posts-list.pug', {
-        posts: posts
-    });
+    return postsHandler.getMany(req, res);
 });
 
 router.post('/posts', async (req, res) => {
-    if (!req.body.postTitle) {
-        res.status(400);
-        res.send('No post title provided');
-        return;
-    }
-
-    await postsService.createPost(
-        req.body.postTitle, 'Draft');
-
-    res.status(201);
-    res.send('Post created');
+    return postsHandler.post(req, res);
 });
 
-router.get('/posts/:seoTitle', (req, res) => {
-    let post = postsService.getPost(req.seoTitle);
-
-    if (!post) {
-        res.status(404);
-        res.send('Post not found');
-        return;
-    }
-
-    res.buildRender('../views/admin/posts-edit/posts-edit.pug', {
-        post: post
-    });
+router.get('/posts/:seoTitle', async (req, res) => {
+    return postsHandler.getMany(req, res);
 });
 
 module.exports = router;

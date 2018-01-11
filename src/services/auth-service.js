@@ -8,8 +8,7 @@ const jwtSecret = 'SECRET';
 async function verifyPassword(password, hash) {
     return new Promise((resolve, reject) => {
         bcrypt.compare(password, hash, (err, result) => {
-           if (err) reject(err);
-           else resolve(result);
+            (err) ? reject(err) : resolve(result);
         });
     });
 }
@@ -17,8 +16,7 @@ async function verifyPassword(password, hash) {
 function createHash(password) {
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, saltRounds, (err, hash) => {
-            if (err) reject(err);
-            else resolve(hash);
+            (err) ? reject(err) : resolve(hash);
         });
     });
 }

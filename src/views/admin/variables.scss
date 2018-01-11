@@ -3,3 +3,9 @@ $login-form-top-margin: 100px;
 $login-form-padding: 20px;
 $login-form-submit-button-colour: #1E90FF;
 $login-form-submit-button-hover-colour: #1b79d8;
+
+$form-input-border-radius: 15px;
+
+$create-post-form-width: 410px;
+$create-post-form-input-box-width: 300px;
+$create-post-form-submit-button-width: ($create-post-form-width - $create-post-form-input-box-width);

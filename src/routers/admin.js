@@ -30,7 +30,17 @@ router.post('/posts', async (req, res) => {
 });
 
 router.get('/posts/:seoTitle', (req, res) => {
-    res.send('Editing...');
+    let post = postsService.getPost(req.seoTitle);
+
+    if (!post) {
+        res.status(404);
+        res.send('Post not found');
+        return;
+    }
+
+    res.buildRender('../views/admin/posts-edit/posts-edit.pug', {
+        post: post
+    });
 });
 
 module.exports = router;

@@ -2,9 +2,9 @@ extends ../base/base
 
 block content
 
-    form(id="create-post-form")
+    form(id="create-post-form" class="form")
         input(id="post-title" type="text" placeholder="Title")
-        input(type="submit" value="Create Post" id="create-post-button")
+        input(type="submit" value="Create Post" id="create-post-button" class="btn")
 
     table(id="posts-table")
         tr(class="header-row")
@@ -19,7 +19,7 @@ block content
                 td(class="summary") #{post.summary}
                 td #{post.publishedOn}
                 td
-                    a(href="posts/" + post.seoTitle class="edit-button") Edit
+                    a(href="/posts/" + post.seoTitle class="btn edit-button") Edit
 
         script.
             var form = document.getElementById('create-post-form');

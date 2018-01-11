@@ -22,8 +22,8 @@ describe('HomePage Handler', () =>{
                 obj: 'All Posts'
             };
 
-            handler = proxyquire('../../src/handlers/homepage-handler', {
-                '../services/posts-service': {
+            handler = proxyquire('../../src/handlers/public/homepage-handler', {
+                '../../services/posts-service': {
                     getPosts: () => { return allPosts; },
                 }
             });
@@ -38,7 +38,7 @@ describe('HomePage Handler', () =>{
 
             assert(buildRender.calledOnce);
             assert(buildRender.calledWithMatch(
-                '../views/public/home/home.pug', {
+                '../../views/public/home/home.pug', {
                 latestPosts: allPosts
             }));
         });

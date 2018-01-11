@@ -38,7 +38,7 @@ describe('HomePage Handler', () =>{
 
             assert(buildRender.calledOnce);
             assert(buildRender.calledWithMatch(
-                '../../views/public/home/home.pug', {
+                '../views/public/home/home.pug', {
                 latestPosts: allPosts
             }));
         });

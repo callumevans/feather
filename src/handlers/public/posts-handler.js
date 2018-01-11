@@ -7,7 +7,7 @@ async function get(req, res) {
         res.status(404);
         res.send(`Post not found.`);
     } else {
-        res.buildRender('../../views/public/post/post.pug', {
+        res.buildRender('../views/public/post/post.pug', {
             post: post,
             PAGE_TITLE: post.title
         });

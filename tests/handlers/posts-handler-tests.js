@@ -54,7 +54,7 @@ describe('Posts Handler', () =>{
 
                 assert(buildRender.calledOnce);
                 assert(buildRender.calledWithMatch(
-                    '../../views/public/post/post.pug', {
+                    '../views/public/post/post.pug', {
                         post: post
                     }));
             });

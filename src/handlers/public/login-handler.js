@@ -2,7 +2,7 @@ const authService = require('../../services/auth-service');
 const userService = require('../../services/user-service');
 
 function get(req, res) {
-    res.buildRender('../../views/admin/login/login.pug');
+    res.buildRender('../views/admin/login/login.pug');
 }
 
 async function post(req, res) {

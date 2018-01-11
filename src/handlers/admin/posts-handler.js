@@ -3,7 +3,7 @@ const postsService = require('../../services/posts-service');
 async function getMany(req, res) {
     let posts = await postsService.getPosts();
 
-    res.buildRender('../../views/admin/posts-list/posts-list.pug', {
+    res.buildRender('../views/admin/posts-list/posts-list.pug', {
         posts: posts
     });
 }
@@ -17,7 +17,7 @@ async function getOne(req, res) {
         return;
     }
 
-    res.buildRender('../../views/admin/posts-edit/posts-edit.pug', {
+    res.buildRender('../views/admin/posts-edit/posts-edit.pug', {
         post: post
     });
 }

@@ -80,7 +80,7 @@ describe('Login Handler', () =>{
 
             assert(buildRender.calledOnce);
             assert(buildRender.calledWithMatch(
-                '../../views/admin/login/login.pug'));
+                '../views/admin/login/login.pug'));
         });
     }) ;
 

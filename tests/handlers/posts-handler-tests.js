@@ -33,7 +33,7 @@ describe('Posts Handler', () =>{
             setStatus = sinon.spy(
                 responseObject, 'status');
 
-            handler = proxyquire('../../src/handlers/post-handler', {
+            handler = proxyquire('../../src/handlers/posts-handler', {
                 '../services/posts-service': {
                     getPost: () => { return post; }
                 }
